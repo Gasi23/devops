@@ -35,6 +35,15 @@ jobs:
           docker-compose up --build -d
           sleep 15 # Aguarda os serviços estarem prontos
 
+      # Verificar se o container do backend está em execução
+      - name: Check if backend container is running
+        run: |
+          if [ "$(docker inspect -f '{{.State.Running}}' backend)" != "true" ]; then
+            echo "Backend container is not running. Exiting.";
+            docker-compose logs backend;
+            exit 1;
+          fi
+
       # Executar testes no backend
       - name: Run backend tests
         run: |
