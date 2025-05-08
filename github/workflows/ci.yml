@@ -4,9 +4,11 @@ on:
   push:
     branches:
       - main
+      - marco
   pull_request:
     branches:
       - main
+      - marco
 
 jobs:
   build-and-test:
